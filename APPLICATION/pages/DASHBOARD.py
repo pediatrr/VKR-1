@@ -16,7 +16,7 @@ def dashboard():
     })
 
     # Заголовок дашборда
-    st.title('Интеорактивный прогноз')
+    st.title('Интерактивный прогноз')
 
     # Фильтры для данных
     age_range = st.slider('Выберите диапазон возраста', min_value=int(data['Возраст'].min()), max_value=int(data['Возраст'].max()), value=(int(data['Возраст'].min()), int(data['Возраст'].max())))
