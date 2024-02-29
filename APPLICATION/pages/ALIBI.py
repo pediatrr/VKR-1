@@ -36,7 +36,7 @@ st.header('ALE plot for decision function')
 fig, ax = plt.subplots()
 plot_ale(logit_exp_lr, ax=ax, n_cols=2, fig_kw={'figwidth': 8, 'figheight': 5}, sharey=None)
 
-# Save the plot to a BytesIO object
+# Save the plot to a BytesIO 
 buf = io.BytesIO()
 plt.savefig(buf, format='png')
 buf.seek(0)
@@ -44,7 +44,7 @@ buf.seek(0)
 # Create a PIL image object
 image = Image.open(buf)
 
-# Display the image in Streamlit
+# Display
 st.image(image, caption='ALE plot for decision function', use_column_width=True)
 
 
@@ -62,7 +62,7 @@ buf.seek(0)
 # Create a PIL image object
 image = Image.open(buf)
 
-# Display the image in Streamlit
+# Display 
 st.image(image, caption='ALE plot for probability function', use_column_width=True)
 
 
@@ -74,3 +74,4 @@ for target in range(3):
 ax.set_xlabel(feature_names[2])
 ax.legend()
 st.pyplot(fig)
+#https://docs.seldon.io/projects/alibi/en/stable/examples/ale_classification.html
