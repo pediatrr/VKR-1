@@ -33,6 +33,20 @@ st.title('ALE plots for Logistic Regression on Iris dataset')
 
 st.header('ALE plot for decision function')
 #st.pyplot(plot_ale(logit_exp_lr, n_cols=2, fig_kw={'figwidth': 8, 'figheight': 5}, sharey=None))
+fig, ax = plt.subplots()
+plot_ale(logit_exp_lr, ax=ax, n_cols=2, fig_kw={'figwidth': 8, 'figheight': 5}, sharey=None)
+
+# Save the plot to a BytesIO object
+buf = io.BytesIO()
+plt.savefig(buf, format='png')
+buf.seek(0)
+
+# Create a PIL image object
+image = Image.open(buf)
+
+# Display the image in Streamlit
+st.image(image, caption='ALE plot for decision function', use_column_width=True)
+
 
 st.header('ALE plot for probability function')
 #st.pyplot(plot_ale(proba_exp_lr, n_cols=2, fig_kw={'figwidth': 8, 'figheight': 5}))
