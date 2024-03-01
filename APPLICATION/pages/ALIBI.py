@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-from sklearn.datasets import load_iris
+#from sklearn.datasets import load_iris
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
@@ -9,11 +9,13 @@ from alibi.explainers import ALE, plot_ale
 import matplotlib.pyplot as plt
 import io
 from PIL import Image
-data = load_iris()
-feature_names = data.feature_names
-target_names = data.target_names
-X = data.data
-y = data.target
+df = pd.read_csv('diabetes.csv')
+df['Outcome'] = df['Outcome'].astype('category')
+
+y = df['Outcome']
+X = df.drop(columns='Outcome')
+
+co = X.columns.tolist()
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
 
@@ -22,8 +24,8 @@ lr.fit(X_train, y_train)
 
 logit_fun_lr = lr.decision_function
 proba_fun_lr = lr.predict_proba
-logit_ale_lr = ALE(logit_fun_lr, feature_names=feature_names, target_names=target_names)
-proba_ale_lr = ALE(proba_fun_lr, feature_names=feature_names, target_names=target_names)
+logit_ale_lr = ALE(logit_fun_lr, feature_names=X.columns, target_names=y.columns)
+proba_ale_lr = ALE(proba_fun_lr, feature_names=X.columns, target_names=y.columns)
 logit_exp_lr = logit_ale_lr.explain(X_train)
 proba_exp_lr = proba_ale_lr.explain(X_train)
 
@@ -68,10 +70,10 @@ st.image(image, caption='ALE plot for probability function', use_column_width=Tr
 
 
 st.header('Histogram for each target')
-fig, ax = plt.subplots()
+'''fig, ax = plt.subplots()
 for target in range(3):
     ax.hist(X_train[y_train==target][:,2], label=target_names[target])
 ax.set_xlabel(feature_names[2])
 ax.legend()
-st.pyplot(fig)
+st.pyplot(fig)'''
 #https://docs.seldon.io/projects/alibi/en/stable/examples/ale_classification.html
