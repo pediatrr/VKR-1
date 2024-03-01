@@ -16,7 +16,7 @@ df['Outcome'] = df['Outcome'].astype('category')
 y = df['Outcome']
 X = df.drop(columns='Outcome')
 co = X.columns.tolist()
-
+yo = y.to_frame().columns.tolist()
 y=y.to_numpy()
 X=X.to_numpy()
 
@@ -24,13 +24,13 @@ X=X.to_numpy()
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
 
-lr = GradientBoostingClassifier()
+lr = lr = LogisticRegression(max_iter=200)
 lr.fit(X_train, y_train)
 
 logit_fun_lr = lr.decision_function
 proba_fun_lr = lr.predict_proba
-logit_ale_lr = ALE(logit_fun_lr)
-proba_ale_lr = ALE(proba_fun_lr)
+logit_ale_lr = ALE(logit_fun_lr,feature_names=co)
+proba_ale_lr = ALE(proba_fun_lr,feature_names=co)
 logit_exp_lr = logit_ale_lr.explain(X_train)
 proba_exp_lr = proba_ale_lr.explain(X_train)
 
@@ -77,10 +77,10 @@ st.image(image, caption='ALE plot for probability function', use_column_width=Tr
 
 
 st.header('Histogram for each target')
-'''fig, ax = plt.subplots()
-for target in range(3):
-    ax.hist(X_train[y_train==target][:,2], label=target_names[target])
-ax.set_xlabel(feature_names[2])
+fig, ax = plt.subplots()
+#for i in range(3):
+ax.hist(X_train, label=yo)
+ax.set_xlabel(co[2])
 ax.legend()
-st.pyplot(fig)'''
+st.pyplot(fig)
 #https://docs.seldon.io/projects/alibi/en/stable/examples/ale_classification.html
