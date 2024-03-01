@@ -24,7 +24,7 @@ X=X.to_numpy()
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
 
-lr = lr = LogisticRegression(max_iter=200)
+lr = GradientBoostingClassifier()
 lr.fit(X_train, y_train)
 
 logit_fun_lr = lr.decision_function
