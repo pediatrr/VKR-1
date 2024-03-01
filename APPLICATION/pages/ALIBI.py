@@ -38,7 +38,7 @@ proba_exp_lr = proba_ale_lr.explain(X_train)
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
-st.title('Accumulated Local Effects plots for Logistic Regression on Iris dataset')
+st.title('Accumulated Local Effects plots for GB on diabets dataset')
 
 st.header('ALE plot for decision function')
 #st.pyplot(plot_ale(logit_exp_lr, n_cols=2, fig_kw={'figwidth': 8, 'figheight': 5}, sharey=None))
