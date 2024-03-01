@@ -1,8 +1,9 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-#from sklearn.datasets import load_iris
+from sklearn.datasets import load_iris
 from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 from alibi.explainers import ALE, plot_ale
@@ -14,12 +15,16 @@ df['Outcome'] = df['Outcome'].astype('category')
 
 y = df['Outcome']
 X = df.drop(columns='Outcome')
-
 co = X.columns.tolist()
+
+y=y.to_numpy()
+X=X.to_numpy()
+
+
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
 
-lr = LogisticRegression(max_iter=200)
+lr = GradientBoostingClassifier()
 lr.fit(X_train, y_train)
 
 logit_fun_lr = lr.decision_function
@@ -28,6 +33,8 @@ logit_ale_lr = ALE(logit_fun_lr)
 proba_ale_lr = ALE(proba_fun_lr)
 logit_exp_lr = logit_ale_lr.explain(X_train)
 proba_exp_lr = proba_ale_lr.explain(X_train)
+
+
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
