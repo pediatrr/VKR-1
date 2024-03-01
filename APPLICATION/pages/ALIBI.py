@@ -24,8 +24,8 @@ lr.fit(X_train, y_train)
 
 logit_fun_lr = lr.decision_function
 proba_fun_lr = lr.predict_proba
-logit_ale_lr = ALE(logit_fun_lr, feature_names=X.columns, target_names=y.columns)
-proba_ale_lr = ALE(proba_fun_lr, feature_names=X.columns, target_names=y.columns)
+logit_ale_lr = ALE(logit_fun_lr)
+proba_ale_lr = ALE(proba_fun_lr)
 logit_exp_lr = logit_ale_lr.explain(X_train)
 proba_exp_lr = proba_ale_lr.explain(X_train)
 
