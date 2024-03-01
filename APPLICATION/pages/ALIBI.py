@@ -17,64 +17,59 @@ y = df['Outcome']
 X = df.drop(columns='Outcome')
 co = X.columns.tolist()
 yo = y.to_frame().columns.tolist()
+multiselect = st.multiselect('Multiselect', co)
+X = df[multiselect]
 y=y.to_numpy()
 X=X.to_numpy()
-
-
-
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
+def mod():
+    lr = GradientBoostingClassifier()
+    lr.fit(X_train, y_train)
 
-lr = GradientBoostingClassifier()
-lr.fit(X_train, y_train)
+    logit_fun_lr = lr.decision_function
+    proba_fun_lr = lr.predict_proba
+    logit_ale_lr = ALE(logit_fun_lr,feature_names=co)
+    proba_ale_lr = ALE(proba_fun_lr,feature_names=co)
+    logit_exp_lr = logit_ale_lr.explain(X_train)
+    proba_exp_lr = proba_ale_lr.explain(X_train)
 
-logit_fun_lr = lr.decision_function
-proba_fun_lr = lr.predict_proba
-logit_ale_lr = ALE(logit_fun_lr,feature_names=co)
-proba_ale_lr = ALE(proba_fun_lr,feature_names=co)
-logit_exp_lr = logit_ale_lr.explain(X_train)
-proba_exp_lr = proba_ale_lr.explain(X_train)
+    st.set_option('deprecation.showPyplotGlobalUse', False)
 
+    st.title('Accumulated Local Effects plots for GB on diabets dataset')
 
+    st.header('ALE plot for decision function')
+    #st.pyplot(plot_ale(logit_exp_lr, n_cols=2, fig_kw={'figwidth': 8, 'figheight': 5}, sharey=None))
+    fig, ax = plt.subplots()
+    plot_ale(logit_exp_lr, ax=ax, n_cols=2, fig_kw={'figwidth': 8, 'figheight': 5}, sharey=None)
 
-st.set_option('deprecation.showPyplotGlobalUse', False)
+    # Save the plot to a BytesIO 
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png')
+    buf.seek(0)
 
-st.title('Accumulated Local Effects plots for GB on diabets dataset')
+    # Create a PIL image object
+    image = Image.open(buf)
 
-st.header('ALE plot for decision function')
-#st.pyplot(plot_ale(logit_exp_lr, n_cols=2, fig_kw={'figwidth': 8, 'figheight': 5}, sharey=None))
-fig, ax = plt.subplots()
-plot_ale(logit_exp_lr, ax=ax, n_cols=2, fig_kw={'figwidth': 8, 'figheight': 5}, sharey=None)
-
-# Save the plot to a BytesIO 
-buf = io.BytesIO()
-plt.savefig(buf, format='png')
-buf.seek(0)
-
-# Create a PIL image object
-image = Image.open(buf)
-
-# Display
-st.image(image, caption='ALE plot for decision function', use_column_width=True)
+    # Display
+    st.image(image, caption='ALE plot for decision function', use_column_width=True)
 
 
-st.header('ALE plot for probability function')
-#st.pyplot(plot_ale(proba_exp_lr, n_cols=2, fig_kw={'figwidth': 8, 'figheight': 5}))
+    st.header('ALE plot for probability function')
+    #st.pyplot(plot_ale(proba_exp_lr, n_cols=2, fig_kw={'figwidth': 8, 'figheight': 5}))
 
-fig, ax = plt.subplots()
-plot_ale(proba_exp_lr, ax=ax, n_cols=2, fig_kw={'figwidth': 8, 'figheight': 5})
+    fig, ax = plt.subplots()
+    plot_ale(proba_exp_lr, ax=ax, n_cols=2, fig_kw={'figwidth': 8, 'figheight': 5})
 
-# Save the plot to a BytesIO object
-buf = io.BytesIO()
-plt.savefig(buf, format='png')
-buf.seek(0)
+    # Save the plot to a BytesIO object
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png')
+    buf.seek(0)
 
-# Create a PIL image object
-image = Image.open(buf)
+    # Create a PIL image object
+    image = Image.open(buf)
 
-# Display 
-st.image(image, caption='ALE plot for probability function', use_column_width=True)
-
-
+    # Display 
+    st.image(image, caption='ALE plot for probability function', use_column_width=True)
 
 st.header('Histogram for each target')
 fig, ax = plt.subplots()
@@ -83,4 +78,6 @@ ax.hist(X_train, label=yo)
 ax.set_xlabel(co[2])
 ax.legend()
 st.pyplot(fig)
+if __name__ == "__main__":
+    mod()
 #https://docs.seldon.io/projects/alibi/en/stable/examples/ale_classification.html
