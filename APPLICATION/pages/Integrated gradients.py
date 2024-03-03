@@ -53,7 +53,7 @@ visualize_image_attr(attr=attrs.squeeze(), original_image=data[i], method='blend
 buf = io.BytesIO()
 plt.savefig(buf, format='png')
 buf.seek(0)
-
 image = Image.open(buf)
-st.image(image, caption='ALE plot for decision function', use_column_width=True)
+st.image(image, caption='CAT', use_column_width=True)
+
 #https://github.com/SeldonIO/alibi/blob/0039fbd84fa5c12ce699741beb1bcd60d5ca72a0/doc/source/examples/integrated_gradients_imagenet.ipynb
