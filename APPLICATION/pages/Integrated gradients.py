@@ -44,3 +44,4 @@ visualize_image_attr(attr=None, original_image=data[i], method='original_image',
 visualize_image_attr(attr=attrs.squeeze(), original_image=data[i], method='blended_heat_map',
                     sign='all', show_colorbar=True, title='Overlaid Attributions',
                      plt_fig_axis=(fig, ax[1]), use_pyplot=True);
+#https://github.com/SeldonIO/alibi/blob/0039fbd84fa5c12ce699741beb1bcd60d5ca72a0/doc/source/examples/integrated_gradients_imagenet.ipynb
