@@ -10,7 +10,8 @@ print('Eager execution enabled: ', tf.executing_eagerly()) # True
 import tensorflow as tf
 import tensorflow as tf
 from tensorflow.keras.applications.resnet_v2 import ResNet50V2
-
+import io
+from PIL import Image
 # Example usage
 model = ResNet50V2(weights='imagenet')
 print("ResNet50V2 model loaded successfully.")
@@ -49,4 +50,10 @@ visualize_image_attr(attr=None, original_image=data[i], method='original_image',
 visualize_image_attr(attr=attrs.squeeze(), original_image=data[i], method='blended_heat_map',
                     sign='all', show_colorbar=True, title='Overlaid Attributions random',
                      plt_fig_axis=(fig, ax[1]), use_pyplot=True);
+buf = io.BytesIO()
+plt.savefig(buf, format='png')
+buf.seek(0)
+
+image = Image.open(buf)
+st.image(image, caption='ALE plot for decision function', use_column_width=True)
 #https://github.com/SeldonIO/alibi/blob/0039fbd84fa5c12ce699741beb1bcd60d5ca72a0/doc/source/examples/integrated_gradients_imagenet.ipynb
