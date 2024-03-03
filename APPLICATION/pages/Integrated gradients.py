@@ -36,15 +36,7 @@ explanation = ig.explain(instance,
                          target=predictions)
 explanation.meta
 explanation.data.keys()
-attrs = explanation.attributions[0]
-baselines = np.random.random_sample(instance.shape)
-fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(10, 5))
-visualize_image_attr(attr=None, original_image=data[i], method='original_image',
-                    title='Original Image', plt_fig_axis=(fig, ax[0]), use_pyplot=False);
 
-visualize_image_attr(attr=attrs.squeeze(), original_image=data[i], method='blended_heat_map',
-                    sign='all', show_colorbar=True, title='Overlaid Attributions',
-                     plt_fig_axis=(fig, ax[1]), use_pyplot=True);
 baselines = np.random.random_sample(instance.shape)
 explanation = ig.explain(instance,
                          baselines=baselines,
