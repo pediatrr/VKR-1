@@ -55,4 +55,5 @@ fig, axes, summary_df = target_67.plot(
     template='plotly_white',
 )
 fig
-
+st.image(fig)
+st.print(summary_df)
