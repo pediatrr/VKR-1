@@ -76,7 +76,7 @@ def pdp_2_2(model, selected_classes):
         predict_kwds={},
         chunk_size=-1,
     )
-    fig_actual_pred, axes, summary_df = predict_67_25.plot(
+    fig_2, axes, summary_df = predict_67_25.plot(
         which_classes=multiselect_out,
         show_percentile=False,
         figsize=None,
@@ -86,7 +86,7 @@ def pdp_2_2(model, selected_classes):
         engine='plotly',
         template='plotly_white',
     )
-    fig_actual_pred
+    fig_2
     return predict_67_25
 
 def pdp_2_3(model, selected_classes):
@@ -118,6 +118,20 @@ if __name__ == "__main__":
         template="plotly_white",
     )
     fig_3
+    fig_4, axes = pdp_67_25.plot(
+    plot_type="contour",
+    to_bins=True,
+    plot_pdp=True,
+    show_percentile=False,
+    which_classes=multiselect_out,
+    figsize=None,
+    dpi=300,
+    ncols=2,
+    plot_params=None,
+    engine="plotly",
+    template="plotly_white",
+)
+fig_4
 #https://github.com/SauceCat/PDPbox/blob/master/tutorials/pdpbox_binary_classification.ipynb
 
 
