@@ -98,12 +98,32 @@ def pdp_2_3(model, selected_classes):
         feature_names=multiselect,
     )
     return pdp_67_25
+def pdp_1_3(model, selected_classes):
+    predict_67_next = info_plots.PredictPlot(
+    model=model,
+    df=selected_classes,
+    model_features=co,
+    feature= multiselect[0],
+    feature_name= multiselect[0],
+    pred_func=None,
+    n_classes=None,
+    num_grid_points=10,
+    grid_type='percentile',
+    percentile_range=None,
+    grid_range=None,
+    cust_grid_points=None,
+    show_outliers=False,
+    endpoint=True,
+    predict_kwds={},
+    chunk_size=-1,
+)
+    return predict_67_next
 
 if __name__ == "__main__":
     model, selected_classes = pdp_2_1()
     predict_67_25 = pdp_2_2(model, selected_classes)
     pdp_67_25 = pdp_2_3(model, selected_classes)
-
+    predict_67_next =  pdp_1_3(model,selected_classes)
     fig_3, axes = pdp_67_25.plot(
         plot_type="grid",
         to_bins=True,
@@ -132,25 +152,8 @@ if __name__ == "__main__":
     template="plotly_white",
 )
 fig_4
-predict_67_next = info_plots.PredictPlot(
-    model=model,
-    df=selected_classes,
-    model_features=co,
-    feature= multiselect[0],
-    feature_name= multiselect[0],
-    pred_func=None,
-    n_classes=None,
-    num_grid_points=10,
-    grid_type='percentile',
-    percentile_range=None,
-    grid_range=None,
-    cust_grid_points=None,
-    show_outliers=False,
-    endpoint=True,
-    predict_kwds={},
-    chunk_size=-1,
-)
-fig, axes, summary_df = predict_67_next.plot(
+
+fig_5, axes, summary_df = predict_67_next.plot(
     show_percentile=True,
     figsize=None,
     ncols=2,
@@ -158,7 +161,7 @@ fig, axes, summary_df = predict_67_next.plot(
     engine='plotly',
     template='plotly_white',
 )
-fig
+fig_5
 #https://github.com/SauceCat/PDPbox/blob/master/tutorials/pdpbox_binary_classification.ipynb
 
 
