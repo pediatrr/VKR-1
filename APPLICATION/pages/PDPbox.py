@@ -132,6 +132,33 @@ if __name__ == "__main__":
     template="plotly_white",
 )
 fig_4
+predict_67_next = info_plots.PredictPlot(
+    model=model,
+    df=selected_classes,
+    model_features=co,
+    feature= multiselect[0],
+    feature_name= multiselect[0],
+    pred_func=None,
+    n_classes=None,
+    num_grid_points=10,
+    grid_type='percentile',
+    percentile_range=None,
+    grid_range=None,
+    cust_grid_points=None,
+    show_outliers=False,
+    endpoint=True,
+    predict_kwds={},
+    chunk_size=-1,
+)
+fig, axes, summary_df = predict_67_next.plot(
+    show_percentile=True,
+    figsize=None,
+    ncols=2,
+    plot_params=None,
+    engine='plotly',
+    template='plotly_white',
+)
+fig
 #https://github.com/SauceCat/PDPbox/blob/master/tutorials/pdpbox_binary_classification.ipynb
 
 
