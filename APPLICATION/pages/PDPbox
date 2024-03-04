@@ -1,0 +1,58 @@
+import pandas as pd
+from pdpbox import pdp, get_example, info_plots
+import streamlit as st
+from xgboost import XGBRegressor
+from xgboost import XGBClassifier
+from sklearn.model_selection import train_test_split
+import matplotlib
+st.set_page_config(page_title="PDPbox", page_icon="🚩")
+df = pd.read_csv('diabetes.csv')
+#df['Outcome'] = df['Outcome'].astype('category')
+
+y = df['Outcome']
+X = df.drop(columns='Outcome')
+# разбивка
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=7)
+
+# Делаем модель
+model = XGBClassifier()
+model.fit(X_train, y_train)
+# предсказываем
+y_pred = model.predict(X_test)
+
+target_67 = info_plots.TargetPlot(
+    df=df,
+    feature="BMI",
+    feature_name="BMI",
+    target="Outcome",
+    num_grid_points=10,
+    grid_type='percentile',
+    percentile_range=None,
+    grid_range=None,
+    cust_grid_points=None,
+    show_outliers=False,
+    endpoint=True,
+)
+
+fig, axes, summary_df = target_67.plot(
+    which_classes=None,
+    show_percentile=True,
+    figsize=(1200, 400),
+    ncols=2,
+    plot_params={"gaps": {"outer_y": 0.05}},
+    engine='plotly',
+    template='plotly_white',
+)
+fig
+
+fig, axes, summary_df = target_67.plot(
+    which_classes=[0, 1],
+    show_percentile=True,
+    figsize=(1200, 400),
+    ncols=2,
+    plot_params={"gaps": {"outer_y": 0.05, "top": 0.1}},
+    engine='plotly',
+    template='plotly_white',
+)
+fig
+
