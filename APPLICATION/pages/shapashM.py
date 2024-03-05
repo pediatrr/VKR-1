@@ -9,6 +9,7 @@ from shapash import SmartExplainer
 import io
 import matplotlib.pyplot as plt
 from PIL import Image
+import plotly.express as px
 st.set_page_config(page_title="ShapashM", page_icon="🚩")
 st.header('Выберите переменные для модели', divider='rainbow')
 
@@ -29,7 +30,12 @@ model.fit(X_train, y_train)
 # предсказываем
 y_pred = pd.DataFrame(model.predict(X_test),columns=['Outcome'],index=X_test.index)
 y_test= y_test.astype(int)
+px.scatter(y_train)
+buf = io.BytesIO()
+plt.savefig(buf, format='png')
+buf.seek(0)
 
+image = Image.open(buf)
 st.dataframe(X_train) # для оценки
 st.dataframe(y_pred)
 st.dataframe(y_test)
@@ -41,11 +47,7 @@ xpl.compile(x=X_test,
  y_target=y_test, # Optional: allows to display True Values vs Predicted Values
  )
 xpl.plot.features_importance()
-buf = io.BytesIO()
-plt.savefig(buf, format='png')
-buf.seek(0)
 
-image = Image.open(buf)
 st.image(image, caption='ALE plot for decision function', use_column_width=True)
 xpl.plot.contribution_plot("BMI")
 xpl.plot.contribution_plot("Age")
