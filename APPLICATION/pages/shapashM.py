@@ -48,9 +48,20 @@ xpl.compile(x=X_test,
  )
 xpl.plot.features_importance()
 
-st.image(image, caption='ALE plot for decision function', use_column_width=True)
+
+fig, ax = plt.subplots(figsize=(6, 4))
 xpl.plot.contribution_plot("BMI")
+buf = io.BytesIO()
+plt.savefig(buf, format='png')
+buf.seek(0)
+st.image(buf, caption='Contribution plot for BMI')
+
+fig, ax = plt.subplots(figsize=(6, 4))
 xpl.plot.contribution_plot("Age")
+buf = io.BytesIO()
+plt.savefig(buf, format='png')
+buf.seek(0)
+st.image(buf, caption='Contribution plot for Age')
 xpl.filter(max_contrib=8,threshold=100)
 xpl.plot.local_plot(index=23)
 summary_df = xpl.to_pandas(
