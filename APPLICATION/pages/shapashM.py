@@ -30,7 +30,7 @@ model.fit(X_train, y_train)
 # предсказываем
 y_pred = pd.DataFrame(model.predict(X_test),columns=['Outcome'],index=X_test.index)
 y_test= y_test.astype(int)
-px.scatter(y_train)
+st.write(px.scatter(y_train))
 buf = io.BytesIO()
 plt.savefig(buf, format='png')
 buf.seek(0)
@@ -46,27 +46,18 @@ xpl.compile(x=X_test,
  y_pred=y_pred,
  y_target=y_test, # Optional: allows to display True Values vs Predicted Values
  )
-xpl.plot.features_importance()
+st.write(xpl.plot.features_importance())
 
 
 fig, ax = plt.subplots(figsize=(6, 4))
-xpl.plot.contribution_plot("BMI")
-buf = io.BytesIO()
-plt.savefig(buf, format='png')
-buf.seek(0)
-st.image(buf, caption='Contribution plot for BMI')
+st.write(xpl.plot.contribution_plot("BMI"))
 
-fig, ax = plt.subplots(figsize=(6, 4))
-xpl.plot.contribution_plot("Age")
-buf = io.BytesIO()
-plt.savefig(buf, format='png')
-buf.seek(0)
-st.image(buf, caption='Contribution plot for Age')
-xpl.filter(max_contrib=8,threshold=100)
-xpl.plot.local_plot(index=23)
+
+st.write(xpl.filter(max_contrib=8,threshold=100))
+st.write(xpl.plot.local_plot(index=23))
 summary_df = xpl.to_pandas(
     max_contrib=3, # Number Max of features to show in summary
     threshold=5000,
 )
-st.dataframe(summary_df)
+st.write(summary_df)
 #xpl.save('./xpl.pkl')
