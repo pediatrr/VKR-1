@@ -25,7 +25,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random
 model = XGBClassifier()
 model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
-u=(classification_report(y_true=y_test, y_pred=y_pred))
+u=classification_report(y_true=y_test, y_pred=y_pred)
 st.write([u])
 """
 explainer = PermutationImportance(predictor=X,
