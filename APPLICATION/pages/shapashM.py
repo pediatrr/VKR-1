@@ -42,7 +42,8 @@ y= y.astype(int)
 # Filter y_pred based on selected classes
 y_pred_filtered = y_pred[y_pred['Outcome'].isin(multiselect_out)].astype(int)
 X_filtered = X.loc[y_pred_filtered.index]
-max = len(X_filtered)
+min_index = min(X_filtered.index)
+max_index = max(X_filtered.index)
 xpl = SmartExplainer(model=model)
 xpl.compile(x=X.loc[y_pred_filtered.index],
             y_pred=y_pred_filtered,
@@ -58,7 +59,7 @@ st.write(xpl.plot.top_interactions_plot(nb_top_interactions=5))
 
 #st.write(xpl.plot.interactions_plot('Sex', 'Pclass'))
 #st.write(xpl.filter(max_contrib=8,threshold=100))
-patient = st.slider('Выберите пациента', min_value=0, max_value=max)
+patient = st.slider('Выберите пациента', min_value=min_index, max_value=max_index)
 index = patient
 st.write(xpl.plot.local_plot(index=index))
 summary_df = xpl.to_pandas(
