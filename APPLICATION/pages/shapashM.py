@@ -57,7 +57,6 @@ fig, ax = plt.subplots(figsize=(6, 4))
 st.write(xpl.plot.contribution_plot(multiselect))
 st.write(xpl.plot.top_interactions_plot(nb_top_interactions=5))
 
-#st.write(xpl.plot.interactions_plot('Sex', 'Pclass'))
 #st.write(xpl.filter(max_contrib=8,threshold=100))
 patient = st.slider('Выберите пациента', min_value=min_index, max_value=max_index)
 index = patient
