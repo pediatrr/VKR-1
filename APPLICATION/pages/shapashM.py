@@ -4,7 +4,8 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from shapash import SmartExplainer
 import matplotlib.pyplot as plt
-from sklearn.ensemble import GradientBoostingClassifier
+from xgboost import XGBClassifier
+#from sklearn.ensemble import GradientBoostingClassifier
 st.set_page_config(page_title="ShapashM", page_icon="🚩")
 st.header('Выберите переменные для модели', divider='rainbow')
 
@@ -26,7 +27,7 @@ with col3:
     patient = st.slider('Выберите пациента', min_value=min(X.index), max_value=max(X.index))
 
 # разбивка
-model = GradientBoostingClassifier()
+model = XGBClassifier()
 model.fit(X, y)
 
 # предсказываем

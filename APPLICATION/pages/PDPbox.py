@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 from pdpbox import pdp, get_example, info_plots
-from xgboost import XGBRegressor
 from xgboost import XGBClassifier
 from sklearn.model_selection import train_test_split
 import matplotlib
