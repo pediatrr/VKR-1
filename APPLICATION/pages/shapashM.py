@@ -10,7 +10,7 @@ st.header('Выберите переменные для модели', divider='
 
 df = pd.read_csv('diabetes.csv')
 df['Outcome'] = df['Outcome'].astype('category')
-df['Pregnancies'] = df['Pregnancies'].astype('category')
+#df['Pregnancies'] = df['Pregnancies'].astype('category') категорильно?
 y = df['Outcome']
 X = df.drop(columns='Outcome')
 
