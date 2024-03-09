@@ -1,17 +1,16 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-from xgboost import XGBClassifier
 from sklearn.model_selection import train_test_split
 from shapash import SmartExplainer
 import matplotlib.pyplot as plt
-
+from sklearn.ensemble import GradientBoostingClassifier
 st.set_page_config(page_title="ShapashM", page_icon="🚩")
 st.header('Выберите переменные для модели', divider='rainbow')
 
 df = pd.read_csv('diabetes.csv')
 df['Outcome'] = df['Outcome'].astype('category')
-
+df['Pregnancies'] = df['Pregnancies'].astype('category')
 y = df['Outcome']
 X = df.drop(columns='Outcome')
 
@@ -27,7 +26,7 @@ with col3:
     patient = st.slider('Выберите пациента', min_value=min(X.index), max_value=max(X.index))
 
 # разбивка
-model = XGBClassifier()
+model = GradientBoostingClassifier()
 model.fit(X, y)
 
 # предсказываем
@@ -67,7 +66,7 @@ xpl_lime_2 = SmartExplainer(
 )
 xpl_lime_2.compile(x=X_filtered)
 
-st.subheader('SHAP доверительный уровень')
-st.write(xpl_shap.plot.stability_plot())
-st.subheader('LIME доверительный уровень')
-st.write(xpl_lime_2.plot.stability_plot())
+col1.subheader('SHAP доверительный уровень')
+col1.write(xpl_shap.plot.stability_plot())
+col3.subheader('LIME доверительный уровень')
+col3.write(xpl_lime_2.plot.stability_plot())
