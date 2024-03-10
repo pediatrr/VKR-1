@@ -53,26 +53,26 @@ visualize_image_attr(attr=None, original_image=img, method='original_image',
                     title='Original Image', plt_fig_axis=(fig, ax[0]), use_pyplot=False)
 
 visualize_image_attr(attr=attrs.squeeze(), original_image=img, method=vismethod,
-                    sign=visattribute, show_colorbar=True, title='Overlaid Attributions',
+                    sign=visattribute, show_colorbar=False, title='Overlaid Attributions',
                      plt_fig_axis=(fig, ax[1]), use_pyplot=True)
 buf = io.BytesIO()
 plt.savefig(buf, format='png')
 buf.seek(0)
 image = Image.open(buf)
-st.image(image, caption='CAT', use_column_width=True)
+st.image(image, caption='Отображение выбранных аттрибутов', use_column_width=True)
 
 
 fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(10, 5))
 visualize_image_attr(attr=None, original_image=img, method='original_image',
-                    title='Original Image', plt_fig_axis=(fig, ax[0]), use_pyplot=False)
+                    title='Original Image', plt_fig_axis=(fig, ax[0]), use_pyplot=True)
 
 visualize_image_attr(attr=attrs.squeeze(), original_image=img, method='blended_heat_map',
-                    sign='all', show_colorbar=True, title='Overlaid Attributions',
+                    sign='all', show_colorbar=False, title='Overlaid Attributions',
                      plt_fig_axis=(fig, ax[1]), use_pyplot=True)
 buf_2 = io.BytesIO()
 plt.savefig(buf_2, format='png')
 buf_2.seek(0)
 image_2 = image
 image_2 = Image.open(buf_2)
-st.image(image_2, caption='CATCAT', use_column_width=True)
+st.image(image_2, caption='Отображение всех аттрибутов', use_column_width=True)
 #https://github.com/SeldonIO/alibi/blob/0039fbd84fa5c12ce699741beb1bcd60d5ca72a0/doc/source/examples/integrated_gradients_imagenet.ipynb
