@@ -14,6 +14,8 @@ import numpy as np
 from tensorflow.keras.preprocessing.image import load_img
 
 from tensorflow import keras
+vismethod = st.selectbox('Выберите метод визуализации', ['blended_heat_map', 'heat_map'])
+visattribute = st.selectbox('Выберите параметры', ['positive', 'negative','absolute_value','all'])
 model = keras.models.load_model('resnet50_pneumonia_model.h5')
 #image_path = ('C:/Users/Андр/Documents/GitHub/VKR/APPLICATION/NORMAL2-IM-1427-0001.jpeg')
 image_path = ('C:/Users/Андр/Documents/GitHub/VKR/APPLICATION/person1946_bacteria_4874.jpeg')
@@ -50,8 +52,8 @@ fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(10, 5))
 visualize_image_attr(attr=None, original_image=img, method='original_image',
                     title='Original Image', plt_fig_axis=(fig, ax[0]), use_pyplot=False)
 
-visualize_image_attr(attr=attrs.squeeze(), original_image=img, method='blended_heat_map',
-                    sign='absolute_value', show_colorbar=True, title='Overlaid Attributions',
+visualize_image_attr(attr=attrs.squeeze(), original_image=img, method=vismethod,
+                    sign=visattribute, show_colorbar=True, title='Overlaid Attributions',
                      plt_fig_axis=(fig, ax[1]), use_pyplot=True)
 buf = io.BytesIO()
 plt.savefig(buf, format='png')
