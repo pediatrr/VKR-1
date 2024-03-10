@@ -19,9 +19,12 @@ yo = set(yo)
 
 default_values = ['Insulin', 'BMI']
 default_values_out = [0, 1]
+col1, col2 = st.columns(2)
 
-multiselect = st.multiselect('Переменные', co, default=default_values)
-multiselect_out = st.multiselect('Класс', yo, default=default_values_out)
+with col1:
+    multiselect = st.multiselect('Переменные', co, default=default_values)
+with col2:
+    multiselect_out = st.multiselect('Класс', yo, default=default_values_out)
 
 def pdp_2_1():
     selected_classes = df[df['Outcome'].isin(multiselect_out)]

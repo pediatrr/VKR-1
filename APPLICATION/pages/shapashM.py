@@ -26,6 +26,8 @@ with col2:
 with col3:
     patient = st.slider('Выберите пациента', min_value=min(X.index), max_value=max(X.index))
 
+    with col2:
+        fraction = st.slider('Выбери количество семплов', min_value=min(X.index), max_value=max(X.index))
 # разбивка
 model = XGBClassifier()
 model.fit(X, y)
@@ -49,6 +51,8 @@ index = patient
 col3.write(xpl.plot.local_plot(index=index))
 
 col1.write(xpl.plot.top_interactions_plot(nb_top_interactions=5))
+fraction = fraction
+col2.write(xpl.plot.scatter_plot_prediction(max_points=fraction)) # 2 x 2
 col3.write(xpl.plot.contribution_plot(multiselect))
 summary_df = xpl.to_pandas(
     max_contrib=8, 
