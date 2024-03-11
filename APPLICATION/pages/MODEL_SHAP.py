@@ -49,12 +49,11 @@ def shap():
     st_shap(shap.plots.waterfall(shap_values[0,:]), height=400,width=1250)
     st_shap(shap.plots.beeswarm(shap_values), height=400,width=1250)
     st_shap(shap.plots.scatter(shap_values),height=400, width=1250)
-    #st_shap(shap.decision_plot(shap_values))
     explainer = shap.TreeExplainer(model)
     shap_values = explainer.shap_values(X)
     st_shap(shap.force_plot(explainer.expected_value, shap_values[0,:], X_display.iloc[0,:]), height=200, width=1250)
     st_shap(shap.force_plot(explainer.expected_value, shap_values[:1000,:], X_display.iloc[:1000,:]), height=400, width=1250)
-    #return  shap_values
+        #return  shap_values
 if __name__ == "__main__":
     shap()
     #def ss (shap_values):
