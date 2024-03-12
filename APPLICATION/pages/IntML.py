@@ -10,6 +10,8 @@ from interpret.provider import InlineProvider
 import streamlit
 import mpld3
 import streamlit.components.v1 as components
+import plotly.io as pio
+import json
 df = pd.read_csv('diabetes.csv')
 df['Outcome'] = df['Outcome'].astype('category')
 
@@ -21,12 +23,15 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 ebm = ExplainableBoostingClassifier()
 ebm.fit(X_train, y_train)
 ebm_global = ebm.explain_global()
+ebm_dict = ebm_global.data()
+ebm_json = json.dumps(ebm_dict)
+plotly_fig = ebm_global.visualize(5) #"work"
+streamlit.write(plotly_fig)
 
-
-
-
+#html = pio.to_html(plotly_fig)
 set_visualize_provider(InlineProvider(detected_envs=['streamlit']))
-streamlit.components.v1.iframe((ebm_global.data), height=1000, width=1000, scrolling=True)
+streamlit.components.v1.html(ebm_json, height=1000, width=1000, scrolling=True)
+streamlit.write(show(ebm_global))
 #st.write(fig_html)
 #fig, ax= plt.subplots()
 #fig_html = mpld3.fig_to_html(ebm_global)
