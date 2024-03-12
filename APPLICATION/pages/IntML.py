@@ -41,7 +41,7 @@ streamlit.markdown('### Локальное дерево данных')
 streamlit.write(show(dt.explain_local(X_test, y_test), 0))
 
 from interpret.glassbox import LogisticRegression
-
+y=y.astype('category')
 lr = LogisticRegression(max_iter=1000, random_state=42)
 lr.fit(X_train, y_train)
 lr_global = lr.explain_global()
