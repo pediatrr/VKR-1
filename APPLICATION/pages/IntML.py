@@ -8,12 +8,9 @@ from interpret import show
 from interpret import set_visualize_provider
 from interpret.provider import InlineProvider
 import streamlit
-import mpld3
 import streamlit.components.v1 as components
-import plotly.io as pio
-import json
 df = pd.read_csv('diabetes.csv')
-df['Outcome'] = df['Outcome'].astype('category')
+#df['Outcome'] = df['Outcome'].astype('category')
 
 y = df['Outcome']
 X = df.drop(columns='Outcome')
@@ -23,22 +20,37 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 ebm = ExplainableBoostingClassifier()
 ebm.fit(X_train, y_train)
 ebm_global = ebm.explain_global()
-ebm_dict = ebm_global.data()
-ebm_json = json.dumps(ebm_dict)
-plotly_fig = ebm_global.visualize(5) #"work"
-streamlit.write(plotly_fig)
-
-#html = pio.to_html(plotly_fig)
-set_visualize_provider(InlineProvider(detected_envs=['streamlit']))
-streamlit.components.v1.html(ebm_json, height=1000, width=1000, scrolling=True)
+set_visualize_provider(InlineProvider(detected_envs=['streamlit'])) #Очень Важно
+#set_visualize_provider(InlineProvider()) неработает
+streamlit.markdown('### Глобальный бустер модели')
 streamlit.write(show(ebm_global))
-#st.write(fig_html)
-#fig, ax= plt.subplots()
-#fig_html = mpld3.fig_to_html(ebm_global)
-#components.html(HTML(init_js + body_js).data, height=1000, width=1000, scrolling=True)
-'''fi = ebm_global._internal_obj['overall']
-st.table(fi)'''
+
+streamlit.markdown('### Локальный бустер')
+ebm_local = ebm.explain_local(X_test, y_test)
+streamlit.write(show(ebm_local)) #локал
 
 
+from interpret.glassbox import ClassificationTree
+dt = ClassificationTree(random_state=42)
+dt.fit(X_train, y_train)
+dt_global = dt.explain_global()
+streamlit.markdown('### Глобальное дерево модели')
+streamlit.write(show(dt_global))
+streamlit.markdown('### Локальное дерево данных')
+
+streamlit.write(show(dt.explain_local(X_test, y_test), 0))
+
+from interpret.glassbox import LogisticRegression
+
+lr = LogisticRegression(max_iter=1000, random_state=42)
+lr.fit(X_train, y_train)
+lr_global = lr.explain_global()
+streamlit.markdown('### Глобальная LOG регрессия')
+streamlit.write(show(lr_global))
+streamlit.markdown('### Локальная LOG регрессия')
+streamlit.write(show(lr.explain_local(X_test, y_test), 0))
+#streamlit.write(show([lr_global, dt_global])) не работает
+#fi = ebm_global._internal_obj['overall']
+#streamlit.table(fi)
 #https://github.com/interpretml/interpret/issues/423
 #https://github.com/interpretml/interpret/pull/438/files

@@ -52,4 +52,21 @@ if __name__ == "__main__":
 # Show and update progress bar
 bar = st.progress(50)
 bar.progress(100)
+'''import streamlit
+set_visualize_provider(InlineProvider(detected_envs=['streamlit'])) #Очень Важно
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.decomposition import PCA
+from sklearn.pipeline import Pipeline
+from interpret.blackbox import LimeTabular
 
+#dl = DecisionListClassifier(feature_names=co)
+
+pca = PCA()
+rf = RandomForestClassifier()
+
+blackbox_model = Pipeline([('pca', pca), ('rf', rf)])
+blackbox_model.fit(X_train, y_train)
+
+lime = LimeTabular(blackbox_model, X_train)
+
+streamlit.write(show(lime.explain_local(X_test, y_test)))'''
