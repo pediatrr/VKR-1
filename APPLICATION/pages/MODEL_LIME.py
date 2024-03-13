@@ -38,6 +38,8 @@ def lime ():
     from sklearn.decomposition import PCA
     from sklearn.pipeline import Pipeline
     from interpret.blackbox import LimeTabular
+    from interpret.blackbox import MorrisSensitivity
+
     pca = PCA()
     rf = RandomForestClassifier()
 
@@ -48,6 +50,9 @@ def lime ():
     set_visualize_provider(InlineProvider(detected_envs=['streamlit'])) #Очень Важно
     streamlit.write(show(lime.explain_local(X_test, y_test)))
     streamlit.success('Success message')
+    msa = MorrisSensitivity(blackbox_model, X_train)
+    streamlit.write(show(msa.explain_global()))
+    streamlit.success('Success message_2')
 if __name__ == "__main__":
     lime()
 
