@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import statsmodels.api as sm
 import streamlit as st
 from statsmodels.formula.api import ols
-st.set_page_config(page_title="MODEL", page_icon="📊")
+st.set_page_config(page_title="MODEL", page_icon="📊",layout='wide')
 st.markdown("# MODEL Demo SHAP")
 st.sidebar.header("MODEl Demo")
 df = pd.read_csv('diabetes.csv')

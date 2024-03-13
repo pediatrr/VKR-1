@@ -6,7 +6,11 @@ from shapash import SmartExplainer
 import matplotlib.pyplot as plt
 from xgboost import XGBClassifier
 #from sklearn.ensemble import GradientBoostingClassifier
-st.set_page_config(page_title="ShapashM", page_icon="🚩")
+import time
+st.set_page_config(page_title="ShapashM", page_icon="🚩", layout='centered')
+bar = st.progress(50)
+time.sleep(3)
+bar.progress(100)
 st.header('Выберите переменные для модели', divider='rainbow')
 
 df = pd.read_csv('diabetes.csv')

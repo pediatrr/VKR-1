@@ -5,8 +5,7 @@ from pygwalker.api.streamlit import init_streamlit_comm, get_streamlit_html
 diabetes= pd.read_csv("diabetes.csv")
 st.set_page_config(
     page_title="Exploratary browser",
-    layout="wide", page_icon="📊"
-)
+    layout="wide", page_icon="📊")
 st.sidebar.header("EDA_demo")
 st.title("Exploratary browser")
 

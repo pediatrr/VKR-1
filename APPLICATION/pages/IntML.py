@@ -9,6 +9,8 @@ from interpret import set_visualize_provider
 from interpret.provider import InlineProvider
 import streamlit
 import streamlit.components.v1 as components
+streamlit.set_page_config(page_title="CAM2+", page_icon="🧊",layout='wide')
+
 df = pd.read_csv('diabetes.csv')
 #df['Outcome'] = df['Outcome'].astype('category')
 

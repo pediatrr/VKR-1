@@ -10,7 +10,7 @@ from alibi.explainers import ALE, plot_ale
 import matplotlib.pyplot as plt
 import io
 from PIL import Image
-st.set_page_config(page_title="ALE", page_icon="🚩")
+st.set_page_config(page_title="ALE", page_icon="🚩",layout='wide')
 df = pd.read_csv('diabetes.csv')
 df['Outcome'] = df['Outcome'].astype('category')
 
