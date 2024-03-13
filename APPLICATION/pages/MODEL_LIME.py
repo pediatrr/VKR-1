@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import streamlit
 import streamlit.components.v1 as components
 
-st.set_page_config(page_title="MODEL", page_icon="📊")
+st.set_page_config(page_title="MODEL", page_icon="🧊",layout='wide')
 st.markdown("# MODEL Demo LIME")
 st.sidebar.header("MODEl Demo LIME library")
 df = pd.read_csv('diabetes.csv')
