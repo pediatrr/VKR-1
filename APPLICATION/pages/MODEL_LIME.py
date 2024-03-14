@@ -7,7 +7,7 @@ from statsmodels.formula.api import ols
 import matplotlib.pyplot as plt
 import streamlit
 import streamlit.components.v1 as components
-
+import  lime
 st.set_page_config(page_title="MODEL", page_icon="🧊",layout='wide')
 st.markdown("# MODEL Demo LIME")
 st.sidebar.header("MODEl Demo LIME library")
@@ -48,10 +48,10 @@ def lime ():
 
     lime = LimeTabular(blackbox_model, X_train)
     set_visualize_provider(InlineProvider(detected_envs=['streamlit'])) #Очень Важно
-    streamlit.write(show(lime.explain_local(X_test, y_test)))
+    streamlit.write(show(lime.explain_local(X_test, y_test, name='Локальная LIME модель')))
     streamlit.success('Success message')
     msa = MorrisSensitivity(blackbox_model, X_train)
-    streamlit.write(show(msa.explain_global()))
+    streamlit.write(show(msa.explain_global(name='Тест Чувствительности Морриса')))
     streamlit.success('Success message_2')
 if __name__ == "__main__":
     lime()

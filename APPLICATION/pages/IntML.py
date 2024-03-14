@@ -9,7 +9,7 @@ from interpret import set_visualize_provider
 from interpret.provider import InlineProvider
 import streamlit
 import streamlit.components.v1 as components
-streamlit.set_page_config(page_title="CAM2+", page_icon="🧊",layout='wide')
+streamlit.set_page_config(page_title="GAM2+", page_icon="🧊",layout='wide')
 
 df = pd.read_csv('diabetes.csv')
 #df['Outcome'] = df['Outcome'].astype('category')
@@ -21,26 +21,26 @@ co = X.columns.tolist()
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 ebm = ExplainableBoostingClassifier()
 ebm.fit(X_train, y_train)
-ebm_global = ebm.explain_global()
+ebm_global = ebm.explain_global(name='Глобальный бустер модели')
 set_visualize_provider(InlineProvider(detected_envs=['streamlit'])) #Очень Важно
 #set_visualize_provider(InlineProvider()) неработает
 streamlit.markdown('### Глобальный бустер модели')
 streamlit.write(show(ebm_global))
 
 streamlit.markdown('### Локальный бустер')
-ebm_local = ebm.explain_local(X_test, y_test)
+ebm_local = ebm.explain_local(X_test, y_test,name='Локальный бустер модели')
 streamlit.write(show(ebm_local)) #локал
 
 
 from interpret.glassbox import ClassificationTree
 dt = ClassificationTree(random_state=42)
 dt.fit(X_train, y_train)
-dt_global = dt.explain_global()
+dt_global = dt.explain_global(name='Глобальный бустер модели')
 streamlit.markdown('### Глобальное дерево модели')
 streamlit.write(show(dt_global))
 streamlit.markdown('### Локальное дерево данных')
 
-streamlit.write(show(dt.explain_local(X_test, y_test), 0))
+streamlit.write(show(dt.explain_local(X_test, y_test), 0, name='Локальный бустер модели'))
 
 from interpret.glassbox import LogisticRegression
 y=y.astype('category')
