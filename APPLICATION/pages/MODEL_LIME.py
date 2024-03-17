@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import streamlit
 import streamlit.components.v1 as components
 import  lime
-st.set_page_config(page_title="MODEL", page_icon="🧊",layout='wide')
+st.set_page_config(page_title="LIME", page_icon="🧊",layout='wide')
 st.markdown("# MODEL Demo LIME")
 st.sidebar.header("MODEl Demo LIME library")
 df = pd.read_csv('diabetes.csv')
@@ -39,7 +39,9 @@ def lime ():
     from sklearn.pipeline import Pipeline
     from interpret.blackbox import LimeTabular
     from interpret.blackbox import MorrisSensitivity
-
+    from interpret.perf import ROC
+    from interpret.perf import PR
+    from interpret.greybox import ShapTree
     pca = PCA()
     rf = RandomForestClassifier()
 
@@ -49,7 +51,18 @@ def lime ():
     lime = LimeTabular(blackbox_model, X_train)
     set_visualize_provider(InlineProvider(detected_envs=['streamlit'])) #Очень Важно
     streamlit.write(show(lime.explain_local(X_test, y_test, name='Локальная LIME модель')))
-    streamlit.success('Success message')
+    rfc_roc = ROC(blackbox_model.predict_proba).explain_perf(X_test,y_test,name='ROC')
+
+    streamlit.write(show(rfc_roc))
+    rfc_PR = PR(blackbox_model.predict_proba).explain_perf(X_test,y_test,name='График Precision')
+    streamlit.write(show(rfc_PR))
+
+
+    rfc_shap = ShapTree(blackbox_model, X_test)
+    # SHAPTREE still unresolved
+    #streamlit.write(show(rfc_shap.explain_local(X_test, y_test, name='Локальная ShapTree модель')))    
+    #streamlit.success('Success message')
+
     msa = MorrisSensitivity(blackbox_model, X_train)
     streamlit.write(show(msa.explain_global(name='Тест Чувствительности Морриса')))
     streamlit.success('Success message_2')

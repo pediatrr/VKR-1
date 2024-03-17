@@ -9,8 +9,8 @@ from interpret import set_visualize_provider
 from interpret.provider import InlineProvider
 import streamlit
 import streamlit.components.v1 as components
-streamlit.set_page_config(page_title="GAM2+", page_icon="🧊",layout='wide')
-
+streamlit.set_page_config(page_title="Grad-CAM2+", page_icon="🧊",layout='wide')
+from interpret.perf import ROC
 df = pd.read_csv('diabetes.csv')
 #df['Outcome'] = df['Outcome'].astype('category')
 
@@ -31,6 +31,8 @@ streamlit.markdown('### Локальный бустер')
 ebm_local = ebm.explain_local(X_test, y_test,name='Локальный бустер модели')
 streamlit.write(show(ebm_local)) #локал
 
+ebm_ebm_roc = ROC(ebm.predict_proba).explain_perf(X_test,y_test,name='EBM_ROC')
+streamlit.write(show(ebm_ebm_roc))
 
 from interpret.glassbox import ClassificationTree
 dt = ClassificationTree(random_state=42)
@@ -51,6 +53,8 @@ streamlit.markdown('### Глобальная LOG регрессия')
 streamlit.write(show(lr_global))
 streamlit.markdown('### Локальная LOG регрессия')
 streamlit.write(show(lr.explain_local(X_test, y_test), 0))
+ebm_lr_roc = ROC(lr.predict_proba).explain_perf(X_test,y_test,name='LR_ROC')
+streamlit.write(show(ebm_lr_roc))
 #streamlit.write(show([lr_global, dt_global])) не работает
 #fi = ebm_global._internal_obj['overall']
 #streamlit.table(fi)
