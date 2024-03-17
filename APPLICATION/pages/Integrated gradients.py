@@ -15,7 +15,7 @@ from tensorflow.keras.preprocessing.image import load_img
 from tensorflow import keras
 import shap
 from streamlit_shap import st_shap
-from tqdm.notebook import tqdm
+#from tqdm.notebook import tqdm
 st.set_page_config(page_title="INTG_img", page_icon="🧊",layout='wide')
 
 vismethod = st.selectbox('Выберите метод визуализации', ['blended_heat_map', 'heat_map'])
