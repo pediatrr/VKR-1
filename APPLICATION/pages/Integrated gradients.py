@@ -15,6 +15,7 @@ from tensorflow.keras.preprocessing.image import load_img
 from tensorflow import keras
 import shap
 from streamlit_shap import st_shap
+from tqdm.notebook import tqdm
 st.set_page_config(page_title="INTG_img", page_icon="🧊",layout='wide')
 
 vismethod = st.selectbox('Выберите метод визуализации', ['blended_heat_map', 'heat_map'])
@@ -76,7 +77,7 @@ def Igalibi():
         # compute shap values
     shap_values = expln_shap(img,max_evals=50)
     st_shap(shap.image_plot(shap_values),height=400, width=1250)
-
+    #import torch
 if st.button('Старт',type="primary"):
     Igalibi()    
 #https://github.com/SeldonIO/alibi/blob/0039fbd84fa5c12ce699741beb1bcd60d5ca72a0/doc/source/examples/integrated_gradients_imagenet.ipynb
