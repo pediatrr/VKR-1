@@ -23,3 +23,4 @@ if __name__ == "__main__":
 # best practice:https://github.com/Jumitti/TFinder/blob/main/TFinder-v1.py
     #import captum
     #captum.insights.example()
+    #https://github.com/PacktPublishing/Interpretable-Machine-Learning-with-Python-2E/blob/main/02/CVD.ipynb
