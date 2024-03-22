@@ -13,14 +13,17 @@ st.markdown("# MODEL Demo LIME")
 st.sidebar.header("MODEl Demo LIME library")
 df = pd.read_csv('diabetes.csv')
 #df['Outcome'] = df['Outcome'].astype('category')
-
+col1, col2 = st.columns(2)
 y = df['Outcome']
 X = df.drop(columns='Outcome')
 
 co = X.columns.tolist()
 st.header('Выберите переменные для модели', divider='rainbow')
-multiselect = st.multiselect('Multiselect', co)
-
+multiselect = st.multiselect('Переменные', co, default=['BMI','Age'])
+with st.expander('Объяснение метода'):
+    st.write('- Поддержка объясненимости отдельных предсказаний для  классификаторов lime (сокращение от local interpretable model-agnostic explanations')
+    st.write('- Lime основан на работе, представленной в этой статье https://arxiv.org/abs/1602.04938')
+    st.write('- Вот ссылка на промо-ролик:https://www.youtube.com/watch?v=hUnRCxnydCc')
 
 def lime ():
     from sklearn.model_selection import train_test_split
@@ -52,10 +55,12 @@ def lime ():
     set_visualize_provider(InlineProvider(detected_envs=['streamlit'])) #Очень Важно
     streamlit.write(show(lime.explain_local(X_test, y_test, name='Локальная LIME модель')))
     rfc_roc = ROC(blackbox_model.predict_proba).explain_perf(X_test,y_test,name='ROC')
-
-    streamlit.write(show(rfc_roc))
     rfc_PR = PR(blackbox_model.predict_proba).explain_perf(X_test,y_test,name='График Precision')
-    streamlit.write(show(rfc_PR))
+    with col1:
+        streamlit.write(show(rfc_roc))
+    
+    with col2:
+        streamlit.write(show(rfc_PR))
 
 
     rfc_shap = ShapTree(blackbox_model, X_test)
