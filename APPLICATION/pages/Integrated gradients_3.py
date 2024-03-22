@@ -20,7 +20,8 @@ def normalize(arr):
 
 from tensorflow import keras
 model = keras.models.load_model('resnet50_pneumonia_model.h5')
-image_path = ('C:/Users/Андр/Documents/GitHub/VKR/APPLICATION/NORMAL2-IM-1427-0001.jpeg')
+#image_path = ('C:/Users/Андр/Documents/GitHub/VKR/APPLICATION/NORMAL2-IM-1427-0001.jpeg')
+image_path = ('C:/Users/1/Documents/GitHub/VKR/APPLICATION/person1946_bacteria_4874.jpeg')
 image = load_img(image_path, target_size=(224, 224))
 img = np.array(image) / 255.0
 img = img.reshape(1, 224, 224, 3)

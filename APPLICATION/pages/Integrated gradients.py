@@ -24,7 +24,7 @@ def Igalibi():
     model = keras.models.load_model('resnet50_pneumonia_model.h5')
     image_path = ('C:/Users/Андр/Documents/GitHub/VKR/APPLICATION/NORMAL2-IM-1427-0001.jpeg')
     image_path = ('C:/Users/Андр/Documents/GitHub/VKR/APPLICATION/person1946_bacteria_4874.jpeg')
-
+    image_path = ('C:/Users/1/Documents/GitHub/VKR/APPLICATION/person1946_bacteria_4874.jpeg')
     image = load_img(image_path, target_size=(224, 224))
     img = np.array(image) / 255.0
     img = img.reshape(1, 224, 224, 3)
@@ -81,4 +81,3 @@ def Igalibi():
 if st.button('Старт',type="primary"):
     Igalibi()    
 #https://github.com/SeldonIO/alibi/blob/0039fbd84fa5c12ce699741beb1bcd60d5ca72a0/doc/source/examples/integrated_gradients_imagenet.ipynb
-
