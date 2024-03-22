@@ -53,7 +53,8 @@ def lime ():
 
     lime = LimeTabular(blackbox_model, X_train)
     set_visualize_provider(InlineProvider(detected_envs=['streamlit'])) #Очень Важно
-    streamlit.write(show(lime.explain_local(X_test, y_test, name='Локальная LIME модель')))
+    with col1:
+        streamlit.write(show(lime.explain_local(X_test, y_test, name='Локальная LIME модель')))
     rfc_roc = ROC(blackbox_model.predict_proba).explain_perf(X_test,y_test,name='ROC')
     rfc_PR = PR(blackbox_model.predict_proba).explain_perf(X_test,y_test,name='График Precision')
     with col1:
@@ -63,13 +64,14 @@ def lime ():
         streamlit.write(show(rfc_PR))
 
 
-    rfc_shap = ShapTree(blackbox_model, X_test)
+    #rfc_shap = ShapTree(blackbox_model, X_test)
     # SHAPTREE still unresolved
     #streamlit.write(show(rfc_shap.explain_local(X_test, y_test, name='Локальная ShapTree модель')))    
     #streamlit.success('Success message')
 
     msa = MorrisSensitivity(blackbox_model, X_train)
-    streamlit.write(show(msa.explain_global(name='Тест Чувствительности Морриса')))
+    with col2:
+        streamlit.write(show(msa.explain_global(name='Тест Чувствительности Морриса')))
     streamlit.success('Success message_2')
 if __name__ == "__main__":
     lime()
