@@ -18,4 +18,4 @@ model.fit(X_train, y_train)
     # Create the explainer and the dashboard
 explainer = ClassifierExplainer(model, X_test, y_test)
 db = ExplainerDashboard(explainer)
-db.run(port=8050, mode='external')
+db.run()
