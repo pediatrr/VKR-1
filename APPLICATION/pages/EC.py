@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from explainerdashboard import ClassifierExplainer, ExplainerDashboard
 df = pd.read_csv('diabetes.csv')
-
+print(explainerdashboard.___version__)
 y = df['Outcome']
 X = df.drop(columns='Outcome')
 

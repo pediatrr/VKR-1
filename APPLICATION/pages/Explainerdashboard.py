@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from explainerdashboard import ClassifierExplainer, ExplainerDashboard
 import streamlit as st
-
+st.write(explainerdashboard.___version__)
 def app():
     st.title("This is the machine learning page")
     st.markdown(
