@@ -43,7 +43,7 @@ streamlit.write(show(dt_global))
 streamlit.markdown('### Локальное дерево данных')
 
 streamlit.write(show(dt.explain_local(X_test, y_test), 0, name='Локальный бустер модели'))
-
+#from sklearn.linear_model import LogisticRegression
 from interpret.glassbox import LogisticRegression
 y=y.astype('category')
 lr = LogisticRegression(max_iter=1000, random_state=42)
