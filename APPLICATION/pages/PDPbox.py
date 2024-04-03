@@ -68,5 +68,34 @@ if __name__ == "__main__":
     pdp_1_1()
 #https://github.com/SauceCat/PDPbox/blob/master/tutorials/pdpbox_binary_classification.ipynb
 
+from sklearn.datasets import load_breast_cancer
+from sklearn.model_selection import train_test_split
 
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.decomposition import PCA
+from sklearn.pipeline import Pipeline
+
+from interpret import show
+from interpret.blackbox import PartialDependence
+import streamlit
+import streamlit.components.v1 as components
+from interpret import show
+from interpret import set_visualize_provider
+from interpret.provider import InlineProvider
+seed = 42
+
+y = df['Outcome']
+X = df.drop(columns='Outcome')
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, random_state=seed)
+
+pca = PCA()
+rf = RandomForestClassifier(random_state=seed)
+
+blackbox_model = Pipeline([('pca', pca), ('rf', rf)])
+blackbox_model.fit(X_train, y_train)
+
+pdp = PartialDependence(blackbox_model, X_train)
+set_visualize_provider(InlineProvider(detected_envs=['streamlit'])) #Очень Важно
+
+streamlit.write(show(pdp.explain_global(), 0))
 
