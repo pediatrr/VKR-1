@@ -78,4 +78,5 @@ if st.button('Старт',type="primary"):
 # Show and update progress bar
 #bar = st.progress(50)
 #bar.progress(100)
-
+#clustering = shap.utils.hclust(X_adult, y_adult)
+#https://shap.readthedocs.io/en/latest/example_notebooks/overviews/An%20introduction%20to%20explainable%20AI%20with%20Shapley%20values.html
