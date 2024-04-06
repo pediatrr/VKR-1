@@ -46,15 +46,17 @@ def shap():
     X_display=sm.add_constant(df[multiselect])
     # визуализация
     #shap.plots.waterfall(shap_values[0])shap.plots.waterfall(shap_values[0, 0])
-    st_shap(shap.plots.waterfall(shap_values[0,:]), height=400,width=1250)
-    st_shap(shap.plots.beeswarm(shap_values), height=400,width=1250)
-    st_shap(shap.plots.bar(shap_values,max_display=3),height=400, width=1250) # new
-    st_shap(shap.plots.scatter(shap_values),height=400, width=1250)
-    st_shap(shap.plots.heatmap(shap_values),height=800, width=1450)
-    st_shap(shap.plots.partial_dependence("Age",model.predict,X_test,feature_expected_value=True,ice = False, model_expected_value = True),height=400, width=1250)
-    # Сюда воткни преключатель
-    st_shap(shap.dependence_plot("Age", shap_values.values, X_test), height=400, width=1250) # Сюда воткни преключатель
-    st_shap(shap.summary_plot(shap_values.values, X_test), height=400, width=1250) # Сюда воткни преключатель
+    with st.expander('Базовые данные SHAP'):
+        st_shap(shap.plots.waterfall(shap_values[0,:]), height=400,width=1250)
+        st_shap(shap.plots.beeswarm(shap_values), height=400,width=1250)
+        st_shap(shap.plots.bar(shap_values,max_display=3),height=400, width=1250) # new
+        st_shap(shap.plots.scatter(shap_values),height=400, width=1250)
+    with st.expander('Тепловая карта'):
+        st_shap(shap.plots.heatmap(shap_values),height=800, width=1450)
+    with st.expander('График зависимостей переменных'):
+        select_p = st.selectbox('Переменная для зависимости', co)
+        st_shap(shap.plots.partial_dependence(select_p,model.predict,X_test,feature_expected_value=True,ice = False, model_expected_value = True),height=400, width=1250)
+        st_shap(shap.dependence_plot(select_p, shap_values.values, X_test), height=400, width=1250) 
     explainer = shap.TreeExplainer(model)
     shap_values = explainer.shap_values(X)
     st_shap(shap.force_plot(explainer.expected_value, shap_values[0,:], X_display.iloc[0,:]), height=200, width=1250)
