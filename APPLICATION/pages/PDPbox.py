@@ -5,9 +5,9 @@ from xgboost import XGBRegressor
 from xgboost import XGBClassifier
 from sklearn.model_selection import train_test_split
 import matplotlib
-st.set_page_config(page_title="PDPbox", page_icon="🚩")
-st.header('Выберите переменные для модели', divider='rainbow')
-
+st.set_page_config(page_title="PDPbox", page_icon="🚩",layout='wide')
+st.header('PDPbox интерпретатор', divider='rainbow')
+col1, col2 = st.columns(2)
 df = pd.read_csv('diabetes.csv')
 #df['Outcome'] = df['Outcome'].astype('category')
 
@@ -51,13 +51,14 @@ blackbox_model.fit(X_train, y_train)
 
 pdp = PartialDependence(blackbox_model, X_train)
 set_visualize_provider(InlineProvider(detected_envs=['streamlit'])) #Очень Важно
-
-streamlit.write(show(pdp.explain_global(name='Локальный PDP'), 0))
+with col1:
+    streamlit.write(show(pdp.explain_global(name='Локальный PDP'), 0))
 from streamlit_shap import st_shap
 import shap
 
 select_p = st.selectbox('Переменная для зависимости', co)
-st_shap(shap.plots.partial_dependence(select_p, blackbox_model.predict,X_test,feature_expected_value=True,ice = False, model_expected_value = True),height=400, width=1250)
+with col2:
+    st_shap(shap.plots.partial_dependence(select_p, blackbox_model.predict,X_test,feature_expected_value=True,ice = False, model_expected_value = True),height=400, width=1250)
 with st.expander('Взаимодействие переменных'):
     def pdp_1_1():
         multiselect = st.multiselect('Выбор признаков', co, default=["BMI",'Age'])
