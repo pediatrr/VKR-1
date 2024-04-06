@@ -56,8 +56,9 @@ with col1:
 from streamlit_shap import st_shap
 import shap
 
-select_p = st.selectbox('Переменная для зависимости', co)
+
 with col2:
+    select_p = st.selectbox('Переменная для зависимости', co)
     st_shap(shap.plots.partial_dependence(select_p, blackbox_model.predict,X_test,feature_expected_value=True,ice = False, model_expected_value = True),height=400, width=1250)
 with st.expander('Взаимодействие переменных'):
     def pdp_1_1():
