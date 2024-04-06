@@ -93,5 +93,5 @@ with st.expander('Взаимодействие переменных'):
             template='plotly_white',
         )
         fig
-    if __name__ == "__main__":
+if __name__ == "__main__":
         pdp_1_1()
