@@ -54,14 +54,7 @@ def mod(X_train, y_train, co):
     plt.savefig(buf, format='png')
     buf.seek(0)
 
-    image = Image.open(buf)
-    st.image(image, caption='ALE plot for probability function', use_column_width=True)
-    st.header('Histogram for each target')
-    fig, ax = plt.subplots()
-    ax.hist(X_train, label=yo)
-    ax.set_xlabel(co[2])
-    ax.legend()
-    st.pyplot(fig)
+
 
 st.button("Reset", type="primary")
 if __name__ == "__main__":
