@@ -15,7 +15,7 @@ X = df.drop(columns='Outcome')
 
 co = X.columns.tolist()
 st.header('Выберите переменные для модели', divider='rainbow')
-multiselect = st.multiselect('Multiselect', co, default=co)
+multiselect = st.multiselect('Выберите пременные', co, default=co)
 
 def shap():
     from sklearn.model_selection import train_test_split

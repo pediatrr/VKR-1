@@ -53,52 +53,52 @@ z = np.linspace(-8,8,200)
 #########################################
 
 
-st.title('Activation Functions')
+st.title('Функции активации')
 
-activation_function = st.selectbox('Choose an activation function', ['None', 'Logistic (Sigmoid) Function', 'Hyperbolic Tangent (Tanh) Function', 'ReLU Function', 'LeakyReLU Function', 'Variants of LeakyReLU Function', 'Exponential Linear Unit Function', 'SELU Function'])
+activation_function = st.selectbox('Выберите функцию активации для разъяснения', ['None', 'Логистическая функция', 'Гиперболическая (Tanh) Функция', 'ReLU Функция', 'LeakyReLU Функция', 'Variants of LeakyReLU Функция', 'Экспоненциальная линейная единичная функция', 'SELU Function'])
 
 ## Logistic Function
-if activation_function == 'Logistic (Sigmoid) Function':
+if activation_function == 'Логистическая функция':
 
-    st.header('Logistic (Sigmoid) Function')
+    st.header('Логистическая функция')
 
-    st.subheader('Description')
-    st.write('It is a sigmoid function with a characteristic "S"-shaped curve.')
+    st.subheader('Описание')
+    st.write('Это сигмоидная функция с характерной "S"-образной кривой.')
     st.markdown(r'**$sigmoid(z)=\frac{1}{1+exp(-z)}$**')
-    st.write('The output of the logistic (sigmoid) function is always between 0 and 1.')   
+    st.write('Выход логистической (сигмоидной) функции всегда находится в диапазоне от 0 до 1.')   
 
-    st.subheader('Plot')
-    logistic_fig  = plot_function(logistic, title='Logistic (Sigmoid) Activation Function')
-    logistic_fig.add_annotation(x=7, y=1, text='<b>Saturation</b>', showarrow=True,
+    st.subheader('График')
+    logistic_fig  = plot_function(logistic, title='Логистическая функция')
+    logistic_fig.add_annotation(x=7, y=1, text='<b>Сатурация</b>', showarrow=True,
      font=dict(family="Montserrat", size=16, color="#1F8123"),
         align="center",arrowhead=2, arrowsize=1, arrowwidth=2, arrowcolor="#A835E1", ax=-20, ay=30,)
-    logistic_fig.add_annotation(x=-7, y=0, text='<b>Saturation</b>', showarrow=True,
+    logistic_fig.add_annotation(x=-7, y=0, text='<b>Сатурация</b>', showarrow=True,
      font=dict(family="Montserrat", size=16, color="#1F8123"),
         align="center",arrowhead=2, arrowsize=1, arrowwidth=2, arrowcolor="#A835E1", ax=0, ay=-30,)
     st.plotly_chart(logistic_fig)
-    with st.expander('Plot Explanation'):
-        st.write('- The logistic function saturates as the inputs become larger (either positive or negative).')
-        st.write('- For large positive and negative values, the function gets asymptotically close to 1 and 0, respectively.')
-        st.write('- When the function saturates, its gradient becomes very close to zero, which slows down learning.')
+    with st.expander('График'):
+        st.write('- Логистическая функция насыщается по мере увеличения входных данных (как положительных, так и отрицательных).')
+        st.write('- При больших положительных и отрицательных значениях функция асимптотически приближается к 1 и 0, соответственно.')
+        st.write('- Когда функция насыщается, ее градиент становится очень близок к нулю, что замедляет обучение.')
 
-    st.subheader('Derivative')
+    st.subheader('Производная')
     st.markdown(r'$sigmoid^{\prime}(z)=sigmoid(z)(1−sigmoid(z))$')
     st.text("")
-    logistic_der_fig = plot_function_derivative(logistic, title='Derivative of the Logistic Function')
+    logistic_der_fig = plot_function_derivative(logistic, title='Производная логистической функции')
     st.plotly_chart(logistic_der_fig)
-    with st.expander('Plot Explanation'):
-        st.write('Notice that the derivative of the logistic function gets very close to zero for large positive and negative inputs.')
+    with st.expander('Объяснение'):
+        st.write('Обратите внимание, что производная логистической функции очень близка к нулю при больших положительных и отрицательных значениях входного сигнала.')
 
-    st.subheader('Pros')
-    st.write('1. The logistic function introduces non-linearity into the network which allows it to solve more complex problems than linear activation functions.\n2. It is continuous and differentiable everywhere.\n3. Because its output is between 0 and 1, it is very common to use in the output layer in binary classification problems.')
+    st.subheader('Достоинства')
+    st.write('1. Логистическая функция вносит нелинейность в сеть, что позволяет ей решать более сложные задачи, чем линейные функции активации.\n2. Она непрерывна и дифференцируема везде.\n3. Поскольку ее выходной сигнал находится в диапазоне от 0 до 1, она часто используется в выходном слое в задачах бинарной классификации.')
 
-    st.subheader('Cons')
-    st.write("1. Limited Sensitivity\n- The logistic function saturates across most of its domain.\n- It is only sensitive to inputs around its midpoint 0.5.")
-    st.write("2. Vanishing Gradients in Deep Neural Networks\n- Because the logistic function can get easily saturated with large inputs, its gradient gets very close to zero. This causes the gradients to get smaller and smaller as backpropagation progresses down to the lower layers of the network.\n- Eventually, the lower layers' weights receive very small updates and never converge to their optimal values.")
+    st.subheader('Ограничения')
+    st.write('1. Ограниченная чувствительность\n- Логистическая функция насыщается на большей части своей области.\n- Она чувствительна только к входам в районе своего среднего значения 0,5.')
+    st.write("2. Исчезающие градиенты в глубоких нейронных сетях\n- Поскольку логистическая функция может легко насытиться при больших входных данных, ее градиент становится очень близким к нулю. Это приводит к тому, что градиенты становятся все меньше и меньше по мере продвижения обратного распространения к нижним слоям сети.\n- В конце концов, веса нижних слоев получают очень маленькие обновления и никогда не сходятся к своим оптимальным значениям.")
 
 ## Tanh Function
-if activation_function == 'Hyperbolic Tangent (Tanh) Function':
-    st.header('Hyperbolic Tangent Function (Tanh)')
+if activation_function == 'Гиперболическая (Tanh) Функция':
+    st.header('Гиперболическая (Tanh) Функция')
 
     st.subheader('Description')
     st.write('The tanh function is also a sigmoid "S"-shaped function.')
@@ -137,8 +137,8 @@ if activation_function == 'Hyperbolic Tangent (Tanh) Function':
     st.markdown("**Note**: the vanishing gradient problem is less severe with the tanh function because it has a mean of 0 (instead of 0.5 like the logistic function).")
 
 ## RelU
-if activation_function == 'ReLU Function':
-    st.header('Rectified Linear Unit (ReLU) Function')
+if activation_function == 'ReLU Функция':
+    st.header('ReLU Функция')
 
     st.subheader('Description')
     st.write('It is a piecewise linear function with two linear pieces that will output the input directly is it is positive (identity function), otherwise, it will output zero.')
@@ -169,8 +169,8 @@ if activation_function == 'ReLU Function':
 
 
 ## LeakyReLU Function
-if activation_function == "LeakyReLU Function":
-    st.title('Leaky ReLU Function')
+if activation_function == "LeakyReLU Функция":
+    st.title('LeakyReLU Функция')
 
     st.subheader('Description')
     st.write('A variant of the ReLU function that solves the dying ReLUs problem.')
@@ -211,8 +211,8 @@ if activation_function == "LeakyReLU Function":
     st.write("3. Better Performance\n- The LeakyReLU function along with its variants almost always outperform the standard ReLU.")
 
 ## Variants of LeakyReLU
-if activation_function == 'Variants of LeakyReLU Function':
-    st.title("Randomized LeakyReLU (RReLU)")
+if activation_function == 'Variants of LeakyReLU Функция':
+    st.title("Variants of LeakyReLU Функция")
     st.write('In this variant, the value of α is picked randomly in a given range during training, and is fixed to an average during testing.')
     st.write('In addition to having the same advantages of the LeakyReLU, it also has a slight regularization effect (reduce overfitting).')
 
@@ -221,8 +221,8 @@ if activation_function == 'Variants of LeakyReLU Function':
     st.write('In other words, the backpropagation algorithm can tweak its value like any other model parameter.')
 
 ## Exponential Linear Unit
-if activation_function == 'Exponential Linear Unit Function':
-    st.title('Exponential Linear Unit (ELU)')
+if activation_function == 'Экспоненциальная линейная единичная функция':
+    st.title('Экспоненциальная линейная единичная функция (ELU)')
 
     st.subheader('Description')
     st.markdown(r'$$ELU_{\alpha}(z)= \left\{\begin{array}{ll}z & z>0 \\{\alpha}(exp(z)-1) & z<=0 \\\end{array}\right.$$')
