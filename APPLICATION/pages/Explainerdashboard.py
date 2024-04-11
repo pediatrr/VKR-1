@@ -8,9 +8,9 @@ from explainerdashboard import ClassifierExplainer, ExplainerDashboard
 import streamlit as st
 st.write(explainerdashboard.___version__)
 def app():
-    st.title("This is the machine learning page")
+    st.title("Открыть панель в новой окне")
     st.markdown(
-        f'<a href="http://127.0.0.1:8050" target="_blank"><input type="button" value="Open ExplainerDashboard"></a>',
+        f'<a href="http://127.0.0.1:8050" target="_blank"><input type="button" value="Открыть дашборд"></a>',
         unsafe_allow_html=True,
     )
 app()
