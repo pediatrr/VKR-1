@@ -63,13 +63,3 @@ def run():
 if __name__ == "__main__":
     run()
 
-
-
-# Github_deskop_test
-# next_test
-# retest
-#hello 29/02/24
-# best practice:https://github.com/Jumitti/TFinder/blob/main/TFinder-v1.py
-    #import captum
-    #captum.insights.example()
-    #https://github.com/PacktPublishing/Interpretable-Machine-Learning-with-Python-2E/blob/main/02/CVD.ipynb
