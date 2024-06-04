@@ -1,0 +1,80 @@
+2024-04-28 19:32:04,800:WARNING:C:\Users\krest\OneDrive\Рабочий стол\Новая папка\pages\1data_dash.py:11: DeprecationWarning:
+
+`import pandas_profiling` is going to be deprecated by April 1st. Please use `import ydata_profiling` instead.
+
+
+2024-04-28 19:32:18,346:WARNING:C:\Users\krest\AppData\Roaming\Python\Python310\site-packages\IPython\core\display.py:431: UserWarning:
+
+Consider using IPython.display.IFrame instead
+
+
+2024-05-07 21:49:16,888:WARNING:C:\Users\krest\OneDrive\Рабочий стол\Новая папка\pages\your_data.py:84: FutureWarning:
+
+The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+
+
+2024-05-07 21:49:26,883:WARNING:C:\Users\krest\OneDrive\Рабочий стол\Новая папка\pages\your_data.py:84: FutureWarning:
+
+The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+
+
+2024-05-07 21:53:54,433:WARNING:C:\Users\krest\OneDrive\Рабочий стол\Новая папка\pages\your_data.py:84: FutureWarning:
+
+The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+
+
+2024-05-07 21:54:15,590:WARNING:C:\Users\krest\OneDrive\Рабочий стол\Новая папка\pages\your_data.py:84: FutureWarning:
+
+The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+
+
+2024-05-07 21:54:22,450:WARNING:C:\Users\krest\OneDrive\Рабочий стол\Новая папка\pages\your_data.py:84: FutureWarning:
+
+The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+
+
+2024-05-07 21:54:28,659:WARNING:C:\Users\krest\OneDrive\Рабочий стол\Новая папка\pages\your_data.py:84: FutureWarning:
+
+The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+
+
+2024-05-07 21:54:35,658:WARNING:C:\Users\krest\OneDrive\Рабочий стол\Новая папка\pages\your_data.py:84: FutureWarning:
+
+The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+
+
+2024-05-07 21:54:41,408:WARNING:C:\Users\krest\OneDrive\Рабочий стол\Новая папка\pages\your_data.py:84: FutureWarning:
+
+The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+
+
+2024-05-07 21:54:48,249:WARNING:C:\Users\krest\OneDrive\Рабочий стол\Новая папка\pages\your_data.py:84: FutureWarning:
+
+The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+
+
+2024-05-07 21:55:33,129:WARNING:C:\Users\krest\OneDrive\Рабочий стол\Новая папка\pages\your_data.py:84: FutureWarning:
+
+The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+
+
+2024-05-07 21:55:34,570:WARNING:C:\Users\krest\OneDrive\Рабочий стол\Новая папка\pages\your_data.py:84: FutureWarning:
+
+The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+
+
+2024-05-07 21:55:52,254:WARNING:C:\Users\krest\OneDrive\Рабочий стол\Новая папка\pages\your_data.py:84: FutureWarning:
+
+The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+
+
+2024-05-07 21:56:14,852:WARNING:C:\Users\krest\OneDrive\Рабочий стол\Новая папка\pages\your_data.py:84: FutureWarning:
+
+The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+
+
+2024-05-07 21:56:27,107:WARNING:C:\Users\krest\OneDrive\Рабочий стол\Новая папка\pages\your_data.py:84: FutureWarning:
+
+The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+
+
